@@ -12,6 +12,7 @@ exports.typeDefs = gql`
   }
   input CoursesFilter {
     discount: Boolean
+    avgRating: Int
   }
   type Course {
     id: ID!
