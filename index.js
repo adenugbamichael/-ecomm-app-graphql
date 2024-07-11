@@ -1,17 +1,51 @@
 const { ApolloServer, gql } = require("apollo-server")
 
+const courses = [
+  {
+    id: "book-06",
+    name: "TypeScript Basics",
+    description: "TypeScript Basics for beginners",
+    price: 599.99,
+    discount: false,
+  },
+  {
+    id: "book-07",
+    name: "GraphQL Basics",
+    description: "GraphQL Basics for beginners",
+    price: 499.99,
+    discount: true,
+  },
+  {
+    id: "book-08",
+    name: "NextJS Basics",
+    description: "NextJS Basics for beginners",
+    price: 599.99,
+    discount: false,
+  },
+]
+
 const typeDefs = gql`
   type Query {
-    welcome: String!
+    courses: [Course!]!
+    welcome: String
     numOfCourses: Int
     price: Float
     isTrainer: Boolean
   }
+  type Course {
+    name: String!
+    description: String!
+    price: Float!
+    discount: Boolean!
+  }
 `
 const resolvers = {
   Query: {
+    courses: () => {
+      return allCourses
+    },
     welcome: () => {
-      return null
+      return "Welcome to the World of GraphQL"
     },
     numOfCourses: () => {
       return 12
