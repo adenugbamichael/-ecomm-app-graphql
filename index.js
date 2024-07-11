@@ -24,28 +24,51 @@ const courses = [
   },
 ]
 
+const genres = [
+  { id: "cat-01", name: "Technical" },
+  { id: "cat-02", name: "History" },
+]
+
 const typeDefs = gql`
   type Query {
     courses: [Course!]!
-    welcome: String
+    course(id: ID!): Course
+    genres: [Genre!]!
+    genre(id: ID!): Genre
     numOfCourses: Int
     price: Float
     isTrainer: Boolean
   }
+
+  type Genre {
+    id: ID!
+    name: String!
+  }
   type Course {
+    id: ID!
     name: String!
     description: String!
     price: Float!
     discount: Boolean!
   }
 `
+
 const resolvers = {
   Query: {
-    courses: () => {
-      return allCourses
+    courses: () => courses,
+    course: (parent, args, context) => {
+      const courseId = args.id
+      const course = courses.find((item) => item.id === courseId)
+      if (!course) return null
+      else return course
     },
-    welcome: () => {
-      return "Welcome to the World of GraphQL"
+
+    genres: () => genres,
+    genre: (parent, args, context) => {
+      const catId = args.id
+      const genre = genres.find((item) => item.id === catId)
+      if (!genre) return null
+      else return genre
     },
     numOfCourses: () => {
       return 12
