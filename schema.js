@@ -18,7 +18,7 @@ exports.typeDefs = gql`
     deleteGenre(id: ID!): Boolean!
     deleteCourse(id: ID!): Boolean!
     deleteReview(id: ID!): Boolean!
-    updateGenre(id: ID!, input: UpdateGenreInput!): Genre
+    updateGenre(id: ID!, input: UpdateGenreInput!): Genre!
     updateCourse(id: ID!, input: UpdateCourseInput!): Course
     updateReview(id: ID!, input: UpdateReviewInput!): Review
   }
