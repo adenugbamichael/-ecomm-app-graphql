@@ -32,10 +32,12 @@ exports.Query = {
     if (!course) return null
     else return course
   },
+
   genres: (parent, args, context) => {
     const genres = context.genres
     return genres
   },
+
   genre: (parent, args, context) => {
     const catId = args.id
     const genres = context.genres
@@ -43,6 +45,7 @@ exports.Query = {
     if (!genre) return null
     else return genre
   },
+
   numOfCourses: () => {
     return 12
   },

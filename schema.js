@@ -10,10 +10,38 @@ exports.typeDefs = gql`
     price: Float
     isTrainer: Boolean
   }
+
+  type Mutation {
+    addGenre(input: AddGenreInput!): Genre!
+    addCourse(input: AddCourseInput!): Course!
+    addReview(input: AddReviewInput!): Review!
+  }
+
+  input AddReviewInput {
+    date: String!
+    title: String!
+    comment: String!
+    rating: Int!
+    courseId: ID!
+  }
+
+  input AddGenreInput {
+    name: String!
+  }
+
+  input AddCourseInput {
+    name: String!
+    description: String!
+    price: Float!
+    discount: Boolean!
+    genreId: ID!
+  }
+
   input CoursesFilter {
     discount: Boolean
     avgRating: Int
   }
+
   type Course {
     id: ID!
     name: String!
@@ -23,11 +51,13 @@ exports.typeDefs = gql`
     genre: Genre
     reviews: [Review!]!
   }
+
   type Genre {
     id: ID!
     name: String!
     courses(filter: CoursesFilter): [Course!]!
   }
+
   type Review {
     id: ID!
     date: String!
