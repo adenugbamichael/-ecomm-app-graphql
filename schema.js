@@ -15,9 +15,27 @@ exports.typeDefs = gql`
     addGenre(input: AddGenreInput!): Genre!
     addCourse(input: AddCourseInput!): Course!
     addReview(input: AddReviewInput!): Review!
+    deleteGenre(id: ID!): Boolean!
+    deleteCourse(id: ID!): Boolean!
+    deleteReview(id: ID!): Boolean!
+    updateGenre(id: ID!, input: UpdateGenreInput!): Genre
+    updateCourse(id: ID!, input: UpdateCourseInput!): Course
+    updateReview(id: ID!, input: UpdateReviewInput!): Review
+  }
+
+  input UpdateGenreInput {
+    name: String!
   }
 
   input AddReviewInput {
+    date: String!
+    title: String!
+    comment: String!
+    rating: Int!
+    courseId: ID!
+  }
+
+  input UpdateReviewInput {
     date: String!
     title: String!
     comment: String!
@@ -34,7 +52,15 @@ exports.typeDefs = gql`
     description: String!
     price: Float!
     discount: Boolean!
-    genreId: ID!
+    genreId: ID
+  }
+
+  input UpdateCourseInput {
+    name: String!
+    description: String!
+    price: Float!
+    discount: Boolean!
+    genreId: ID
   }
 
   input CoursesFilter {
